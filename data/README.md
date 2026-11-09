@@ -13,3 +13,9 @@ From the repository root, run `python scripts/download_bike_sharing.py`. It down
 The notebook expects `season` (the dataset's category index) and `cnt` (total rental count). It selects these columns by name rather than relying on column position. The downloader also checks for `dteday`, nonempty rows, valid season codes and nonnegative numeric counts before writing. No input rows are modified.
 
 The CSV and archive are not committed. Keep this source/citation note alongside the notebook when sharing the exercise. Do not substitute unrelated data under the same filename and report it as the UCI experiment.
+
+## Forest Fires
+
+Source: [Forest Fires, UCI](https://archive.ics.uci.edu/dataset/162/forest%2Bfires). Citation: Cortez, P. and Morais, A. (2007). *Forest Fires* [Dataset]. [doi:10.24432/C5D88D](https://doi.org/10.24432/C5D88D). UCI lists CC BY 4.0 for this dataset too.
+
+Run `python scripts/download_forest_fires.py` from the repository root to obtain `data/raw/forest-fires/forestfires.csv`. Raw CSV files stay ignored. The target is the named `area` column, measured in hectares. Month and day are categorical inputs; the notebook fits their encoder on training rows only. The exercise predicts raw burned area with a simple linear baseline rather than reproducing the original paper's log-transform/cross-validation experiments.
