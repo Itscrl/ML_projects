@@ -4,12 +4,17 @@ from __future__ import annotations
 
 import csv
 import io
+import os
 from pathlib import Path
 from urllib.request import urlopen
 from zipfile import ZipFile
 
 SOURCE_URL = "https://archive.ics.uci.edu/static/public/275/bike%2Bsharing%2Bdataset.zip"
-DESTINATION = Path(__file__).resolve().parents[1] / "data/raw/bike-sharing/day.csv"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+DATA_ROOT = Path(os.environ.get("ML_DATA_DIR") or REPOSITORY_ROOT / "data/raw").expanduser()
+if not DATA_ROOT.is_absolute():
+    DATA_ROOT = REPOSITORY_ROOT / DATA_ROOT
+DESTINATION = DATA_ROOT / "bike-sharing/day.csv"
 
 
 def main() -> None:

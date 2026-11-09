@@ -19,3 +19,5 @@ The CSV and archive are not committed. Keep this source/citation note alongside 
 Source: [Forest Fires, UCI](https://archive.ics.uci.edu/dataset/162/forest%2Bfires). Citation: Cortez, P. and Morais, A. (2007). *Forest Fires* [Dataset]. [doi:10.24432/C5D88D](https://doi.org/10.24432/C5D88D). UCI lists CC BY 4.0 for this dataset too.
 
 Run `python scripts/download_forest_fires.py` from the repository root to obtain `data/raw/forest-fires/forestfires.csv`. Raw CSV files stay ignored. The target is the named `area` column, measured in hectares. Month and day are categorical inputs; the notebook fits their encoder on training rows only. The exercise predicts raw burned area with a simple linear baseline rather than reproducing the original paper's log-transform/cross-validation experiments.
+
+Set `ML_DATA_DIR` to relocate both inputs without editing a notebook. It is a base directory with the same dataset subfolders; relative overrides resolve from the repository root. Only the reviewed public dataset files should be used when reproducing the recorded results. A different input is a different experiment.

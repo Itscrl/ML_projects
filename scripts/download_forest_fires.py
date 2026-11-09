@@ -3,13 +3,18 @@ from __future__ import annotations
 
 import csv
 import io
+import os
 import math
 from pathlib import Path
 from urllib.request import urlopen
 from zipfile import ZipFile
 
 SOURCE_URL = "https://archive.ics.uci.edu/static/public/162/forest%2Bfires.zip"
-DESTINATION = Path(__file__).resolve().parents[1] / "data/raw/forest-fires/forestfires.csv"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+DATA_ROOT = Path(os.environ.get("ML_DATA_DIR") or REPOSITORY_ROOT / "data/raw").expanduser()
+if not DATA_ROOT.is_absolute():
+    DATA_ROOT = REPOSITORY_ROOT / DATA_ROOT
+DESTINATION = DATA_ROOT / "forest-fires/forestfires.csv"
 
 
 def main() -> None:

@@ -23,6 +23,28 @@ python -m venv .venv
 
 The downloader retrieves `day.csv` from UCI's published archive into `data/raw/bike-sharing/`. It validates the CSV before writing and refuses to overwrite an existing file. Raw data is ignored by Git. See [dataset notes](data/README.md) for provenance, attribution and the expected fields.
 
+## Use a different data directory
+
+Both downloaders and notebooks accept `ML_DATA_DIR`, an optional base directory. Absolute paths work directly; relative paths resolve from the repository root even when the notebook is opened inside `notebooks/`. Preserve the `bike-sharing/day.csv` and `forest-fires/forestfires.csv` subpaths below that base.
+
+```powershell
+$env:ML_DATA_DIR = 'C:\Data\ml-coursework'
+.\.venv\Scripts\python.exe scripts/download_bike_sharing.py
+.\.venv\Scripts\python.exe scripts/download_forest_fires.py
+```
+
+The path above is an example to choose deliberately; it is not created or required by the source. Unset this session's override with `Remove-Item Env:ML_DATA_DIR` to return to the ignored repository-local data directory. Raw files are not part of this source release.
+
+## Verify without a notebook interface
+
+After obtaining both datasets, run:
+
+```powershell
+.\.venv\Scripts\python.exe scripts/verify_notebooks.py
+```
+
+The verifier starts a separate fresh Python process per reviewed notebook, runs its code cells with a noninteractive plotting backend, checks finite evaluation values and guards the forest-fire target/input separation. It prints the resulting row counts and metrics without saving notebook outputs. It executes the two reviewed source notebooks in this repository, so review source changes before running them. This is headless code verification, not a browser/Jupyter UI test.
+
 To open the notebook, install a notebook interface in the same environment:
 
 ```powershell
