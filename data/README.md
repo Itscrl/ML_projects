@@ -21,3 +21,7 @@ Source: [Forest Fires, UCI](https://archive.ics.uci.edu/dataset/162/forest%2Bfir
 Run `python scripts/download_forest_fires.py` from the repository root to obtain `data/raw/forest-fires/forestfires.csv`. Raw CSV files stay ignored. The target is the named `area` column, measured in hectares. Month and day are categorical inputs; the notebook fits their encoder on training rows only. The exercise predicts raw burned area with a simple linear baseline rather than reproducing the original paper's log-transform/cross-validation experiments.
 
 Set `ML_DATA_DIR` to relocate both inputs without editing a notebook. It is a base directory with the same dataset subfolders; relative overrides resolve from the repository root. Only the reviewed public dataset files should be used when reproducing the recorded results. A different input is a different experiment.
+
+## Spambase
+
+Obtain the public UCI Spambase input with `python scripts/download_spambase.py`. It uses the same optional `ML_DATA_DIR` base and stores `spambase/spambase.data` outside Git. Source and dataset terms: https://archive.ics.uci.edu/dataset/94/spambase . The input has 4,601 rows, 57 features and one binary target. Consult UCI for attribution and reuse terms; no dataset is redistributed here.

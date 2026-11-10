@@ -80,3 +80,7 @@ On 9 November 2026, the five forest-fire code cells ran headlessly on 517 rows (
 Maintained by Carl James Poopalaretnam. The notebook was adapted from my original `PS1_Poopalaretnam_BSCS2B/Linear Regression Scikit Learn.ipynb` assignment. This first curated import adds named column selection, a portable data loader, descriptive plot labels, a mean baseline and setup/data notes while retaining the original regression exercise.
 
 This repository is an academic learning collection. Additional assignments will be added only after review; they are not included yet. The dataset has its own license and citation, documented separately. No blanket software license has been assigned in this import.
+
+## Spam classification
+
+`notebooks/spam_classification.ipynb` curates my PS3 exercise with raw-row splitting followed by a train-fitted scaling/classification pipeline. Run `python scripts/download_spambase.py` first, then execute the notebook. Run `python -m unittest discover -s tests -v` for the held-out-extremes regression check. This notebook is currently separate from the two-regression-notebook verifier.
