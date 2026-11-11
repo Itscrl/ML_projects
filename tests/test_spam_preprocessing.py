@@ -1,13 +1,11 @@
 import unittest
 import numpy as np
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
+from scripts.spam_pipeline import build_spam_pipeline
 
 class TrainingOnlyScaling(unittest.TestCase):
     def test_held_out_extremes_do_not_change_training_statistics(self):
         train = np.array([[0., 1.], [1., 2.], [2., 3.], [3., 4.]])
-        model = make_pipeline(StandardScaler(), LogisticRegression(solver="liblinear"))
+        model = build_spam_pipeline()
         model.fit(train, [0, 0, 1, 1])
         scaler = model.named_steps["standardscaler"]
         expected = train.mean(axis=0)
