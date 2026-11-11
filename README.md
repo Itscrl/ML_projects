@@ -43,7 +43,7 @@ After obtaining both datasets, run:
 .\.venv\Scripts\python.exe scripts/verify_notebooks.py
 ```
 
-The verifier starts a separate fresh Python process per reviewed notebook, runs its code cells with a noninteractive plotting backend, checks finite evaluation values and guards the forest-fire target/input separation. It prints the resulting row counts and metrics without saving notebook outputs. It executes the two reviewed source notebooks in this repository, so review source changes before running them. This is headless code verification, not a browser/Jupyter UI test.
+The verifier starts a separate fresh Python process per reviewed notebook, runs its code cells with a noninteractive plotting backend, checks finite evaluation values and guards the forest-fire target/input separation. It prints the resulting row counts and metrics without saving notebook outputs. It executes the three reviewed source notebooks in this repository, so review source changes before running them. This is headless code verification, not a browser/Jupyter UI test.
 
 To open the notebook, install a notebook interface in the same environment:
 
@@ -83,4 +83,4 @@ This repository is an academic learning collection. Additional assignments will 
 
 ## Spam classification
 
-`notebooks/spam_classification.ipynb` curates my PS3 exercise with raw-row splitting followed by a train-fitted scaling/classification pipeline. Run `python scripts/download_spambase.py` first, then execute the notebook. Run `python -m unittest discover -s tests -v` for the held-out-extremes regression check. This notebook is currently separate from the two-regression-notebook verifier.
+`notebooks/spam_classification.ipynb` curates my PS3 exercise with raw-row splitting followed by a train-fitted scaling/classification pipeline. Run `python scripts/download_spambase.py` first, then execute the notebook. Run `python -m unittest discover -s tests -v` for the held-out-extremes regression check. The shared verifier now executes this classifier alongside both regression notebooks in separate fresh processes. Its preprocessing regression test imports the same pipeline factory as the notebook.

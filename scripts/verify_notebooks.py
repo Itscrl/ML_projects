@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-NOTEBOOKS = ("bike_sharing_linear_regression.ipynb", "forest_fire_regression.ipynb")
+NOTEBOOKS = ("bike_sharing_linear_regression.ipynb", "forest_fire_regression.ipynb", "spam_classification.ipynb")
 
 
 def worker(name: str) -> None:
@@ -30,6 +30,12 @@ def worker(name: str) -> None:
         if cell["cell_type"] == "code":
             count += 1
             exec(compile("".join(cell["source"]), f"{name}:cell-{count}", "exec"), namespace)
+    if name == "spam_classification.ipynb":
+        score = float(namespace["accuracy_score"](namespace["y_test"], namespace["prediction"]))
+        if not math.isfinite(score) or not 0 <= score <= 1:
+            raise ValueError("Invalid spam classification accuracy")
+        print(json.dumps({"notebook": name, "code_cells": count, "rows": len(namespace["data"]), "train": len(namespace["y_train"]), "test": len(namespace["y_test"]), "accuracy": score}))
+        return
     for key in ("mse", "baseline_mse"):
         if not math.isfinite(float(namespace[key])):
             raise ValueError(f"Non-finite evaluation value: {key}")
@@ -51,7 +57,7 @@ def main() -> None:
     env.setdefault("MPLCONFIGDIR", str(ROOT / ".cache/matplotlib"))
     for name in NOTEBOOKS:
         subprocess.run([sys.executable, str(Path(__file__).resolve()), "--worker", name], cwd=ROOT, env=env, check=True)
-    print("Both reviewed notebooks passed in separate fresh Python processes. Interactive Jupyter was not tested.")
+    print("All three reviewed notebooks passed in separate fresh Python processes. Interactive Jupyter was not tested.")
 
 
 if __name__ == "__main__":
