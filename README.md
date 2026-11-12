@@ -84,3 +84,7 @@ This repository is an academic learning collection. Additional assignments will 
 ## Spam classification
 
 `notebooks/spam_classification.ipynb` curates my PS3 exercise with raw-row splitting followed by a train-fitted scaling/classification pipeline. Run `python scripts/download_spambase.py` first, then execute the notebook. Run `python -m unittest discover -s tests -v` for the held-out-extremes regression check. The shared verifier now executes this classifier alongside both regression notebooks in separate fresh processes. Its preprocessing regression test imports the same pipeline factory as the notebook.
+
+## Sleep classifier contract
+
+See [the nine-feature training/inference contract](sleep_classifier/README.md). Its regression tests reject the original app's feature mismatch and inconsistent class counts. Legacy TensorFlow artifacts and the Flask interface have not yet been migrated or runtime-validated.
